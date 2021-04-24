@@ -1,2 +1,3 @@
 #!/bin/bash
-python yabai_terminal.py "$@"
+my_dir="$(dirname "$0")"
+python "$my_dir/yabai_terminal.py" "$@"
