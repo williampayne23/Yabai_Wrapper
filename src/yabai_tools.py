@@ -18,6 +18,9 @@ def get_main_id():
     except:
         return None
 
+def close_window(id):
+    os.system('yabai -m window ' + id + ' --close')
+
 def window_toggle(toggle, window_id=None):
     if window_id == None or window_id=="None":
         os.system('yabai -m window --toggle ' + toggle)
