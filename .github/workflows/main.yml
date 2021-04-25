@@ -1,0 +1,47 @@
+# .github/workflows/release.yml
+# Start Homebrew Releaser when a new tag is created
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  homebrew-releaser:
+    runs-on: ubuntu-latest
+    name: homebrew-releaser
+    steps:
+      - name: Release my project to my Homebrew tap
+        uses: williampayne23/homebrew-releaser@v1
+        with:
+          # The name of the homebrew tap to publish your formula to as it appears on GitHub.
+          # Required.
+          homebrew_owner: williampayne23
+          homebrew_tap: homebrew-utilities
+
+          # The name of the folder in your homebrew tap where formula will be committed to.
+          # Default is shown.
+          formula_folder: formula
+
+          # The GitHub Token (saved as a repo secret) that has `repo` permissions for the homebrew tap you want to release to.
+          # Required.
+          github_token: ${{ secrets.HOMEBREW_TAP_GITHUB_TOKEN }}
+
+          # Git author info used to commit to the homebrew tap.
+          # Defaults are shown.
+          commit_owner: homebrew-releaser
+          commit_email: homebrew-releaser@example.com
+
+          # Custom install command for your formula.
+          # Required.
+          install: |
+            libexec.install "src/yabai_wrapper.sh" => "yabai_wrapper"
+            libexec.install Dir["src/*"]
+
+            # Then write executables under #{bin}/
+            bin.write_exec_script (libexec/"yabai_wrapper")
+          
+          # Custom test command for your formula so you can run `brew test`.
+          # Optional.
+          # Skips committing the generated formula to a homebrew tap (useful for local testing)
+          # Default is shown.
+          skip_commit: false
