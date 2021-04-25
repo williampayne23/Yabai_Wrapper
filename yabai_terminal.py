@@ -7,9 +7,7 @@ def focus_direction(args):
     yabai_tools.focus_direction(args.direction, follow_focus=not args.no_focus)
 
 def swap_select_direction(args):
-    swap_select.swap_select(args.direction, follow_focus=not args.no_focus)
-    if(args.key_mod):
-        os.system('osascript ~/bin/Config/Tiling/yabaiEndSwitch.scpt')
+    swap_select.swap_select(args.direction, follow_focus=not args.no_focus, key_mod=args.key_mod)
 
 def focus_display_direction(args):
     yabai_tools.focus_display(args.direction, follow_focus=not args.no_focus)

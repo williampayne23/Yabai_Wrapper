@@ -1,9 +1,6 @@
 import os, json, sys
 from yabai_tools import *
 
-dir_path = os.path.dirname(os.path.realpath(__file__)) + '/'
-
-
 def initiate(direction, follow_focus=True):
     next_bordered = id_in_direction(get_main_id(), direction)
     if (next_bordered == None):
@@ -33,7 +30,7 @@ def get_bordered():
     else:
         return -1
 
-def swap_select(direction, follow_focus=True):
+def swap_select(direction, follow_focus=True, key_mod=False):
     bordered = get_bordered()
     if(direction == None or direction == 'swap'):
         if (bordered != -1):
@@ -41,5 +38,9 @@ def swap_select(direction, follow_focus=True):
     else:
         if (bordered == -1):
             initiate(direction, follow_focus=follow_focus)
+            if(key_mod):
+                dirname = os.path.dirname(__file__)
+                filename = os.path.join(dirname, 'yabaiEndSwitch.scpt')
+                os.system('osascript ' + filename)
         else:
             move(direction, bordered, follow_focus=follow_focus) 
