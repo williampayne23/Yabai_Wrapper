@@ -34,6 +34,6 @@ jobs:
           # Custom install command for your formula.
           # Required.
           install:
-            libexec.install "src/yabai_wrapper.sh" => "yabai_wrapper"
-            libexec.install Dir["src/*"]
+            libexec.install "src/yabai_wrapper.sh" => "yabai_wrapper"\n
+            libexec.install Dir["src/*"]\n
             bin.write_exec_script (libexec/"yabai_wrapper")
