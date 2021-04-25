@@ -37,9 +37,3 @@ jobs:
             libexec.install "src/yabai_wrapper.sh" => "yabai_wrapper"
             libexec.install Dir["src/*"]
             bin.write_exec_script (libexec/"yabai_wrapper")
-          
-          # Custom test command for your formula so you can run `brew test`.
-          # Optional.
-          # Skips committing the generated formula to a homebrew tap (useful for local testing)
-          # Default is shown.
-          skip_commit: false
