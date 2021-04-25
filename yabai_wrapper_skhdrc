@@ -14,7 +14,12 @@ ctrl + shift - right    : yabai_wrapper swap-select east --key-mod
 ctrl + shift - up       : yabai_wrapper swap-select north --key-mod
 ctrl + shift - down     : yabai_wrapper swap-select south --key-mod
 
-#Moving Spaces
+#Focus Spaces
+
+ctrl + alt - left   : osascript -e 'tell application "BetterTouchTool" to trigger_named "Space Prev"'
+ctrl + alt - right  : osascript -e 'tell application "BetterTouchTool" to trigger_named "Space Next"'
+
+#Send to space
 
 ctrl + alt + shift - left   : yabai -m window --space prev && osascript -e 'tell application "BetterTouchTool" to trigger_named "Space Prev"'
 ctrl + alt + shift - right  : yabai -m window --space next && osascript -e 'tell application "BetterTouchTool" to trigger_named "Space Next"'
