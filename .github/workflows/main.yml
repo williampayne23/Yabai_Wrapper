@@ -33,11 +33,9 @@ jobs:
 
           # Custom install command for your formula.
           # Required.
-          install: |
+          install:
             libexec.install "src/yabai_wrapper.sh" => "yabai_wrapper"
             libexec.install Dir["src/*"]
-
-            # Then write executables under #{bin}/
             bin.write_exec_script (libexec/"yabai_wrapper")
           
           # Custom test command for your formula so you can run `brew test`.
