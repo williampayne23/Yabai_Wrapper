@@ -16,11 +16,13 @@ def search(args):
     def add_to_menu(title, subtitle, arg, uid=None, item_type=None, autocomplete=None, icon={}):
         items.append(make_item(title, subtitle, arg, uid=uid, item_type=item_type, autocomplete=autocomplete, icon=icon))
     
-    add_to_menu("grid layout", "Switch to grid layout", "change-layout bsp", icon=make_url_icon("border-all-solid"))
-    add_to_menu("stack layout", "Switch to stack layout", "change-layout stack", icon=make_url_icon("layer-group-solid"))
-    add_to_menu("free layout", "Switch to free layout", "change-layout float", icon=make_url_icon("window-restore-regular"))
+    add_to_menu("Grid layout", "Switch to grid layout", "change-layout bsp", icon=make_url_icon("border-all-solid"))
+    add_to_menu("Stack layout", "Switch to stack layout", "change-layout stack", icon=make_url_icon("layer-group-solid"))
+    add_to_menu("Free layout", "Switch to free layout", "change-layout float", icon=make_url_icon("window-restore-regular"))
 
-    add_to_menu("window float", "Ignore yabai for this window", "window float", icon=make_url_icon("window-restore-regular"))
+    window = yabai_tools.get_current_window()
+    action = "Manage" if window['floating'] else "Float"
+    add_to_menu(action, action + " this window", "window float", icon=make_url_icon("window-restore-regular"))
 
     window = yabai_tools.get_current_window()
     add_to_menu("Window options", "Show Options For "+ window['app'], 'window-options --open-alfred --window-id ' + str(window['id']), icon=make_app_icon(window['pid'], window['app']))
@@ -35,18 +37,25 @@ def window_options_menu(args):
     if args.open_alfred:
         os.system('osascript -e \'tell application id "com.runningwithcrayons.Alfred" to run trigger "window_actions" in workflow "com.alfredapp.yabai_tools" with argument "{window_id}"\''.format(window_id=args.window_id))
         return
-    window_id = "" if (args.window_id == None) else "--window-id " + args.window_id
-    arg = lambda action : "window {action} ".format(action=action, window_id=args.window_id) + window_id
-    window_options = [
-            make_item("Focus", "Focus on this window", arg("focus"), icon=make_url_icon("window-restore-regular")),
-            make_item("Close", "Close this window", arg("close"), icon=make_url_icon("window-restore-regular")),
-            make_item("Swap to", "Swap to this window", arg("swap"), icon=make_url_icon("window-restore-regular")),
-            make_item("Float", "Float this window", arg("float"), icon=make_url_icon("window-restore-regular")),
-            make_item("Zoom Parent", "Zoom to the parent window", arg("zoom-parent"), icon=make_url_icon("expand-alt-solid")),
-            make_item("Zoom Fullscreen", "Fill the screen", arg("zoom-fullscreen"), icon=make_url_icon("expand-alt-solid")),
-            make_item("Native Fullscreen", "Full Screen Mode", arg("native-fullscreen"), icon=make_url_icon("expand-alt-solid")),
-            make_item("Bordered", "Toggle Bordered", arg("border"), icon=make_url_icon("Square")),
-    ]
+    window = yabai_tools.get_current_window()
+    window_id_str = ""
+    if args.window_id != None
+        window_id_str = "--window-id " + args.window_id
+        window = yabai_tools.get_window(args.window_id)
+    arg = lambda action : "window {action} ".format(action=action, window_id=args.window_id) + window_id_str
+    window_options = []
+    
+    window_options.append(make_item("Focus", "Focus on this window", arg("focus"), icon=make_url_icon("window-restore-regular")))
+    window_options.append(make_item("Close", "Close this window", arg("close"), icon=make_url_icon("window-restore-regular")))
+    window_options.append(make_item("Swap to", "Swap to this window", arg("swap"), icon=make_url_icon("window-restore-regular")))
+    action = "Manage" if window['floating'] else "Float"
+    window_options.append(make_item(action, action + " this window", arg("float"), icon=make_url_icon("window-restore-regular")))
+    window_options.append(make_item("Zoom Parent", "Zoom to the parent window", arg("zoom-parent"), icon=make_url_icon("expand-alt-solid")))
+    window_options.append(make_item("Zoom Fullscreen", "Fill the screen", arg("zoom-fullscreen"), icon=make_url_icon("expand-alt-solid")))
+    window_options.append(make_item("Native Fullscreen", "Full Screen Mode", arg("native-fullscreen"), icon=make_url_icon("expand-alt-solid")))
+    
+    action = "Unborder" if window['bordered'] else "Border"
+    window_options.append(make_item(action, action + " this window", arg("border"), icon=make_url_icon("Square")))
     output = {
         "items" : window_options
     }

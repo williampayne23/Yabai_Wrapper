@@ -8,6 +8,10 @@ def get_current_window():
     stream = os.popen('yabai -m query --windows --window')
     return json.loads(stream.read())
 
+def get_window(id):
+    stream = os.popen('yabai -m query --windows --window ' + str(id))
+    return json.loads(stream.read())
+
 def get_main_id():
     stream = os.popen('yabai -m query --windows --window')
     output = stream.read()
