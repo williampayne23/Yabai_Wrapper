@@ -39,7 +39,7 @@ def window_options_menu(args):
         return
     window = yabai_tools.get_current_window()
     window_id_str = ""
-    if args.window_id != None
+    if args.window_id != None:
         window_id_str = "--window-id " + args.window_id
         window = yabai_tools.get_window(args.window_id)
     arg = lambda action : "window {action} ".format(action=action, window_id=args.window_id) + window_id_str
@@ -54,7 +54,7 @@ def window_options_menu(args):
     window_options.append(make_item("Zoom Fullscreen", "Fill the screen", arg("zoom-fullscreen"), icon=make_url_icon("expand-alt-solid")))
     window_options.append(make_item("Native Fullscreen", "Full Screen Mode", arg("native-fullscreen"), icon=make_url_icon("expand-alt-solid")))
     
-    action = "Unborder" if window['bordered'] else "Border"
+    action = "Unborder" if window['border'] else "Border"
     window_options.append(make_item(action, action + " this window", arg("border"), icon=make_url_icon("Square")))
     output = {
         "items" : window_options
