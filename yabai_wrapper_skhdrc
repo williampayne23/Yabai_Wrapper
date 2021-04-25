@@ -1,0 +1,39 @@
+# Windows
+
+#Focus
+
+ctrl - left  : yabai_wrapper focus west 
+ctrl - right : yabai_wrapper focus east 
+ctrl - up    : yabai_wrapper focus north
+ctrl - down  : yabai_wrapper focus south
+
+#Switching
+
+ctrl + shift - left     : yabai_wrapper swap-select west --key-mod
+ctrl + shift - right    : yabai_wrapper swap-select east --key-mod
+ctrl + shift - up       : yabai_wrapper swap-select north --key-mod
+ctrl + shift - down     : yabai_wrapper swap-select south --key-mod
+
+#Moving Spaces
+
+ctrl + alt + shift - left   : yabai -m window --space prev && osascript -e 'tell application "BetterTouchTool" to trigger_named "Space Prev"'
+ctrl + alt + shift - right  : yabai -m window --space next && osascript -e 'tell application "BetterTouchTool" to trigger_named "Space Next"'
+
+#Zoom
+
+ctrl - z : yabai_wrapper window zoom-parent 
+ctrl - x : yabai_wrapper window zoom-fullscreen 
+
+#controls
+
+ctrl - q : yabai -m window --close
+
+#Send to displays
+
+ctrl + shift - 0x2F : yabai_wrapper send-to-display east 
+ctrl + shift - 0x2B : yabai_wrapper send-to-display west 
+
+#Focus Displays
+
+ctrl - 0x2F : yabai_wrapper focus-display east 
+ctrl - 0x2B : yabai_wrapper focus-display west 
