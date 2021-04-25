@@ -4,6 +4,10 @@ def get_windows():
     stream = os.popen('yabai -m query --windows')
     return json.loads(stream.read())
 
+def get_current_window():
+    stream = os.popen('yabai -m query --windows --window')
+    return json.loads(stream.read())
+
 def get_main_id():
     stream = os.popen('yabai -m query --windows --window')
     output = stream.read()
@@ -14,8 +18,11 @@ def get_main_id():
     except:
         return None
 
-def window_toggle(toggle):
-    os.system('yabai -m window --toggle ' + toggle)
+def window_toggle(toggle, window_id=None):
+    if window_id == None or window_id=="None":
+        os.system('yabai -m window --toggle ' + toggle)
+    else:
+        os.system('yabai -m window ' + window_id + ' --toggle ' + toggle)
 
 #implmented in terminal wrapper   
 def change_layout(layout):
