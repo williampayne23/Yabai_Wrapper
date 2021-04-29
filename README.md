@@ -4,7 +4,7 @@ A python wrapper for yabai with some more advanced features.
 
 Specifically window swap selection, which lets me select a window by holding `ctrl-shift` and the arrow keys and then when I release `ctrl-shift` the selected window swaps with the focussed window.
 
-![this](./window_select.gif)
+![this](resources/window_select.gif)
 
 Selecting and focussing on windows works across displays which isn't normally included in yabai. The selecting and focussing functionality moves across displays seamlessly.
 
@@ -47,18 +47,18 @@ yabai -m signal --add event=window_created label="Floating Windows" action='yaba
 
 [Install SKHD](https://github.com/koekeishiya/skhd) if you haven't already
 
-Then copy [this file](yabai_wrapper_skhdrc) into your skhdrc (usually kept in /Users/yourusername/.skhdrc)
+Then copy [this file](resources/yabai_wrapper_skhdrc) into your skhdrc (usually kept in /Users/yourusername/.skhdrc)
 
 ### If you'd like to use the Alfred workflow
 
-Add [this alfred workflow](yabai_tools.alfredworkflow) you'll need to have [Alfred installed](https://www.alfredapp.com/help/getting-started/install/) and pay for Alfred's powerpack to use workflows
+Add [this alfred workflow](resources/yabai_tools.alfredworkflow) you'll need to have [Alfred installed](https://www.alfredapp.com/help/getting-started/install/) and pay for Alfred's powerpack to use workflows
 
-![alfred](alfred.gif)
+![alfred](resources/alfred.gif)
 
 ## Usage
 ### Key Commands
 
-[I've pulled the below into a cheetsheet here](Key_Commands_Cheetsheet.md)
+[I've pulled the below into a cheetsheet here](resources/Key_Commands_Cheetsheet.md)
 
 If you use the SKHD configuration provided you get only a few key commands
 
