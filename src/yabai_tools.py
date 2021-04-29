@@ -41,45 +41,30 @@ def change_layout(layout):
 def toggle_bordered(id):
     os.system('yabai -m window ' + str(id) + ' --toggle border')
 
-def swap_to(id, follow_focus=True):
-    if (not follow_focus):
-        os.system('yabai -m window --swap '+ str(id))
-    else:
-        os.system('yabai -m config mouse_follows_focus on')
-        os.system('yabai -m window --swap '+ str(id))
-        os.system('yabai -m config mouse_follows_focus off')
+def swap_to(id):
+    os.system('yabai -m window --swap '+ str(id))
 #implmented in terminal wrapper
-def focus_direction(direction, follow_focus=True):
+def focus_direction(direction):
     target_id = id_in_direction(get_main_id(), direction)
     if(target_id == None):
-        focus_display(direction, follow_focus=follow_focus)
+        focus_display(direction)
     else:
-        focus_to(target_id, follow_focus=follow_focus)
+        focus_to(target_id)
 #implmented in terminal wrapper
-def focus_display(direction, follow_focus=True):
+def focus_display(direction):
     """
     Focusses on the display in direction
-    If follow_focus is False the mouse will not follow focus
     """
-    if (not follow_focus):
-        os.system('yabai -m display --focus ' + direction)
-    else:
-        os.system('yabai -m config mouse_follows_focus on')
-        os.system('yabai -m display --focus ' + direction)
-        os.system('yabai -m config mouse_follows_focus off')
+    os.system('yabai -m display --focus ' + direction)
 
-def focus_to(id, follow_focus=True):
-    if (not follow_focus):
-        os.system('yabai -m window --focus ' + str(id))
-    else:
-        os.system('yabai -m config mouse_follows_focus on')
-        os.system('yabai -m window --focus ' + str(id))
-        os.system('yabai -m config mouse_follows_focus off')
+def focus_to(id):
+    os.system('yabai -m window --focus ' + str(id))
+
 #implmented in terminal wrapper
-def send_to_display(direction, follow_focus=True):
+def send_to_display(direction):
     main_id = get_main_id()
     os.system('yabai -m window --display ' + direction)
-    focus_to(main_id, follow_focus=follow_focus)
+    focus_to(main_id)
 
 def id_in_direction(start, direction):
     def get_edge(window, direction):

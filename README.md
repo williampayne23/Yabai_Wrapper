@@ -4,16 +4,43 @@ A python wrapper for yabai with some more advanced features.
 
 Specifically window swap selection, which lets me select a window by holding `ctrl-shift` and the arrow keys and then when I release `ctrl-shift` the selected window swaps with the focussed window.
 
-I also added the feature of selecting and focussing on windows across displays which isn't normally included in yabai. If your focussed window is on the west of the eastmost display and you use the command `yabai_wrapper focus west` it will select the eastmost window of the display on the right. If you used the standard `yabai -m window --focus west` you would get a `could not locate a eastward managed window.` message as yabai can't move across displays.
+![this](./window_Select.gif)
+
+Selecting and focussing on windows works across displays which isn't normally included in yabai. The selecting and focussing functionality moves across displays seamlessly.
+
 
 ## Installation
 
 If you haven't already [install homebrew](https://brew.sh)
 
-Install the wrapper with...
+Open terminal and install the wrapper
 
 ```'shell'
 brew install williampayne23/utilities/yabai_wrapper --build-from-source
+```
+
+If you haven't already you need to set yabai up to start on boot
+
+```'shell'
+brew services start yabai
+```
+
+### Optional, a few Yabai extras:
+
+You can mess with your yabai settings by editing the hidden .yabairc file in your home directory (/User/yourusername)
+
+Open that file by typing 
+```
+open -a TextEdit filename
+```
+
+Then copy the following into the file
+```
+#Tells yabai to manage windows whenever you restart your Mac 
+yabai -m config layout bsp
+#These tell yabai not to manage windows which can't be resized (such as System Preferences windows)
+yabai -m signal --add event=window_created label="Floating Windows" action='yabai -m query --windows --window $YABAI_WINDOW_ID | jq -er ".resizable == 0 and .floating == 0" && yabai -m window $YABAI_WINDOW_ID --toggle float'
+yabai -m signal --add event=window_created label="Floating Windows" action='yabai -m query --windows --window $YABAI_WINDOW_ID | jq -er ".resizable == 0 and .floating == 0" && yabai -m window $YABAI_WINDOW_ID --toggle float'
 ```
 
 ### If you'd like to use my SKHD (key binds)

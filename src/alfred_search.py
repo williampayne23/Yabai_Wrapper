@@ -94,7 +94,7 @@ def make_app_icon(pid, title):
 def make_url_icon(icon_url):
     path = "./icons/{icon}.png".format(icon=icon_url)
     if not os.path.isfile(path):
-        response = requests.get("https://raw.githubusercontent.com/williampayne23/Yabai_Wrapper/master/icons/" + icon + '.png')
+        response = requests.get("https://raw.githubusercontent.com/williampayne23/Yabai_Wrapper/master/icons/" + icon_url + '.png')
         file = open(path, "wb")
         file.write(response.content)
         file.close()
