@@ -109,11 +109,10 @@ def id_in_direction(start, direction):
         }
         return axes[direction]
 
-    stream = os.popen('yabai -m query --windows')
-    windows = json.loads(stream.read())
-    visible = list(map(lambda x : {'id':x['id'], 'frame':x['frame'], 'title':x['title']}, filter(lambda x: x['visible'], windows))) 
+    windows = get_windows()
+    visible = filter(lambda x: x['visible'], windows)
 
-    window = next((window for window in visible if window['id'] == start), None)
+    window = get_current_window()
     otherWindows = list(filter(lambda window: window['id'] != start, visible))
     if (window == None or len(otherWindows) == 0):
         return None
