@@ -1,20 +1,25 @@
 import os, json
 
+def careful_load_json(data):
+    try:
+        return json.loads(data)
+    except:
+        return None
+
 def get_windows():
     stream = os.popen('yabai -m query --windows')
-    return json.loads(stream.read())
+    return careful_load_json(stream.read())
 
 def get_current_window():
     stream = os.popen('yabai -m query --windows --window')
-    return json.loads(stream.read())
+    return careful_load_json(stream.read())
 
 def get_window(id):
     stream = os.popen('yabai -m query --windows --window ' + str(id))
-    return json.loads(stream.read())
+    return careful_load_json(stream.read())
 
 def get_main_id():
-    stream = os.popen('yabai -m query --windows --window')
-    output = stream.read()
+    output = get_current_window()
     if(output == None):
         return None
     try:

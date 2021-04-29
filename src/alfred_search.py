@@ -7,7 +7,8 @@ def window_list(args):
         return
     windows = []
     for window in yabai_tools.get_windows():
-        windows.append(make_item(window['title'], window['app'], "window-options --open-alfred --window-id {window_id}".format(window_id=window['id']), icon=make_app_icon(window['pid'], window['app'])))
+        if window['title'] != 'Alfred':
+            windows.append(make_item(window['title'], window['app'], "window-options --open-alfred --window-id {window_id}".format(window_id=window['id']), icon=make_app_icon(window['pid'], window['app'])))
 
     print(json.dumps({"items": windows}))
 
@@ -21,11 +22,11 @@ def search(args):
     add_to_menu("Free layout", "Switch to free layout", "change-layout float", icon=make_url_icon("window-restore-regular"))
 
     window = yabai_tools.get_current_window()
-    action = "Manage" if window['floating'] else "Float"
-    add_to_menu(action, action + " this window", "window float", icon=make_url_icon("window-restore-regular"))
-
-    window = yabai_tools.get_current_window()
-    add_to_menu("Window options", "Show Options For "+ window['app'], 'window-options --open-alfred --window-id ' + str(window['id']), icon=make_app_icon(window['pid'], window['app']))
+    if window != None:
+        action = "Manage" if window['floating'] else "Float"
+        add_to_menu(action, action + " this window", "window float", icon=make_url_icon("window-restore-regular"))
+        add_to_menu("Window options", "Show Options For "+ window['app'], 'window-options --open-alfred --window-id ' + str(window['id']), icon=make_app_icon(window['pid'], window['app']))
+    
     add_to_menu("Window list", "Show Window List", 'window-list --open-alfred')
     output = {
         "items" : items

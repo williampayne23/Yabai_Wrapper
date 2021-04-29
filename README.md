@@ -53,6 +53,8 @@ Then copy [this file](yabai_wrapper_skhdrc) into your skhdrc (usually kept in /U
 
 Add [this alfred workflow](yabai_tools.alfredworkflow) you'll need to have [Alfred installed](https://www.alfredapp.com/help/getting-started/install/) and pay for Alfred's powerpack to use workflows
 
+![alfred](alfred.gif)
+
 ## Usage
 ### Key Commands
 
