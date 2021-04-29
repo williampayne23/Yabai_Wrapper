@@ -4,7 +4,7 @@ A python wrapper for yabai with some more advanced features.
 
 Specifically window swap selection, which lets me select a window by holding `ctrl-shift` and the arrow keys and then when I release `ctrl-shift` the selected window swaps with the focussed window.
 
-![this](./window_Select.gif)
+![this](./window_select.gif)
 
 Selecting and focussing on windows works across displays which isn't normally included in yabai. The selecting and focussing functionality moves across displays seamlessly.
 
