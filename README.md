@@ -31,7 +31,7 @@ You can mess with your yabai settings by editing the hidden .yabairc file in you
 
 Open that file by typing 
 ```
-open -a TextEdit filename
+open -a TextEdit ~/.yabairc
 ```
 
 Then copy the following into the file
