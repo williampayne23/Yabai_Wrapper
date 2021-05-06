@@ -31,7 +31,7 @@ You can mess with your yabai settings by editing the hidden .yabairc file in you
 
 Open that file by typing 
 ```
-open -a TextEdit filename
+open -a TextEdit ~/.yabairc
 ```
 
 Then copy the following into the file
@@ -40,7 +40,7 @@ Then copy the following into the file
 yabai -m config layout bsp
 #These tell yabai not to manage windows which can't be resized (such as System Preferences windows)
 yabai -m signal --add event=window_created label="Floating Windows" action='yabai -m query --windows --window $YABAI_WINDOW_ID | jq -er ".resizable == 0 and .floating == 0" && yabai -m window $YABAI_WINDOW_ID --toggle float'
-yabai -m signal --add event=window_created label="Floating Windows" action='yabai -m query --windows --window $YABAI_WINDOW_ID | jq -er ".resizable == 0 and .floating == 0" && yabai -m window $YABAI_WINDOW_ID --toggle float'
+yabai -m signal --add event=application_launched action='WINDOW_ID=$(yabai -m query --windows | jq -r ".[] | select(.pid == $YABAI_PROCESS_ID).id"); yabai -m query --windows --window $YABAI_WINDOW_ID | jq -er ".resizable == 0 and .floating == 0" && yabai -m window $WINDOW_ID --toggle float'   
 ```
 
 ### If you'd like to use my SKHD (key binds)
